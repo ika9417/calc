@@ -16,7 +16,7 @@ def multiply(first, second):
         result2 = result2 + first
 #     return result1 + result2 / (10 ** splitter(second)[2])
 # TODO
-#     Need reseach how avoid devine function
+#     Need research how avoid devine function
 
     return result1 + float("0." + str(result2))
 
