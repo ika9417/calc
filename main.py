@@ -1,3 +1,5 @@
+import math
+
 def summ(first, second):
     return first + second
 
@@ -14,18 +16,20 @@ def multiply(first, second):
         return multiply(second, first)
 
     for i in range(splitter(second)[0]):
-        result1 = result1 + first
+        result1 = math.fsum([result1, first])
 
     for i in range(splitter(second)[1]):
-        result2 = result2 + first
-    return result1 + result2/(10 ** splitter(second)[2])
+        result2 = math.fsum([result2, first])
+
+    # return result1 + result2/(10 ** splitter(second)[2])
+    result = result2 / (10 ** splitter(second)[2])
+    return math.fsum([result, result1])
 
 
 def splitter(input_data):
     fullpart = int(input_data)
-    decimalpart_raw = input_data - fullpart
-    stepen10 = len(str(decimalpart_raw)) - 2
-    decimalpart = int(str(decimalpart_raw)[2:])
+    decimalpart = int(str(input_data).split(".")[1])
+    stepen10 = len(str(decimalpart))
     return fullpart, decimalpart, stepen10
 
 
@@ -54,3 +58,4 @@ def interact():
 
 if __name__ == '__main__':
     print(interact())
+    # print(splitter(32.43456))
