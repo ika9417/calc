@@ -36,7 +36,8 @@ def multiply(first, second):
     result2 = 0
 
     if first < second:
-        return multiply(second, first)
+        second, first = first, second
+        return multiply(first, second)
 
     for i in range(splitter(second)[0]):
         result1 = math.fsum([result1, first])
