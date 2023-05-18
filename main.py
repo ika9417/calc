@@ -1,4 +1,10 @@
 def summ(first, second):
+    """
+
+    :param first:
+    :param second:
+    :return:
+    """
     return first + second
 
 
