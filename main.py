@@ -1,6 +1,7 @@
 """ Pet project for fun """
 
 import math
+import sys
 
 
 def summ(first, second):
@@ -27,7 +28,8 @@ def substr(first, second):
 def multiply(first, second):
     """
     This function is really interesting it also wait two args.
-    After then it compare it for detect which arg is bigger for to reduce the number of iterations of repetitions of zincls.
+    After then it compare it for detect which arg is bigger for to reduce the number
+    of iterations of repetitions of zincls.
     This function using math.fsum module into "for".
     """
     result1 = 0
@@ -79,15 +81,15 @@ def interact():
 
     if operation == "+":
         return summ(first, second)
-    elif operation == "-":
+    if operation == "-":
         return substr(first, second)
-    elif operation == "*":
+    if operation == "*":
         return multiply(first, second)
-    elif operation == "/":
+    if operation == "/":
         return divid(first, second)
-    else:
-        print("Somthing wrong - fallback!")
-        exit(1)
+
+    print("Somthing wrong - fallback!")
+    sys.exit(1)
 
 
 if __name__ == '__main__':
