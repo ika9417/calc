@@ -89,7 +89,12 @@ def clirun(first, operation, second):
 
 
 def batch_str(input_data: str):
-    return eval(input_data)
+    """
+    :param input_data: string for calculation
+    :return: result of calculation
+    """
+    # return eval(input_data) # for example only!
+    return print(input_data)
 
 
 if __name__ == '__main__':
