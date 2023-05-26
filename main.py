@@ -15,6 +15,8 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--first', help="The first number")
 parser.add_argument('--operation', help="The math operation")
 parser.add_argument('--second', help="The second number")
+parser.add_argument('--corepart', action=argparse.BooleanOptionalAction,
+                    help="Use for get result as integer only")
 parser.add_argument('--version', action='version', version='%(prog)s 0.1-alpha')
 
 
@@ -63,16 +65,7 @@ def interact():
     second = float(input("Write second: "))
     operation = str(input("Write operation type (+, -, *, /): "))
 
-    if operation == "+":
-        return addition(first, second)
-    if operation == "-":
-        return subtraction(first, second)
-    if operation == "*":
-        return multiplication(first, second)
-    if operation == "/":
-        return division(first, second)
-    print("Somthing wrong - fallback!")
-    sys.exit(1)
+    return clirun(first, operation, second)
 
 
 def clirun(first, operation, second):
@@ -99,5 +92,23 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         # не совсем, хак но это другой способ вытягивания аогументов
         print(interact())
+
+    elif args.corepart:
+        print(
+            int(
+                clirun(
+                    float(args.first),
+                    str(args.operation),
+                    float(args.second)
+                )
+            )
+        )
+
     else:
-        print(clirun(float(args.first), str(args.operation), float(args.second)))
+        print(
+            clirun(
+                float(args.first),
+                str(args.operation),
+                float(args.second)
+            )
+        )
