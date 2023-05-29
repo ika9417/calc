@@ -17,6 +17,7 @@ parser.add_argument('--operation', help="The math operation")
 parser.add_argument('--second', help="The second number")
 parser.add_argument('--corepart', action=argparse.BooleanOptionalAction,
                     help="Use for get result as integer only")
+parser.add_argument('--calculation')
 parser.add_argument('--version', action='version', version='%(prog)s 0.1-alpha')
 
 
@@ -87,11 +88,18 @@ def clirun(first, operation, second):
     return None
 
 
+def batch_str(input_data: str):
+    return eval(input_data)
+
+
 if __name__ == '__main__':
     args = parser.parse_args()
     if len(sys.argv) == 1:
         # не совсем, хак но это другой способ вытягивания аогументов
         print(interact())
+
+    elif len(args.calculation) > 0:
+        print(batch_str(args.calculation))
 
     elif args.corepart:
         print(
