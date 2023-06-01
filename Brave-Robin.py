@@ -2,7 +2,7 @@ import re
 
 """
 <ath functions and priority:
-The highest: "(, )"
+The highest: (, )
 to low:
     - ** (aka ^), root - # ! not released
     - Trigonometric function
@@ -11,20 +11,33 @@ to low:
 """
 
 
-a = "10+10*100-20*2+5"
-# a1 = ""
+a = "10+10*100-20*2+3+4"
 
-print(a)
-# print("Dumb solution:", re.findall(r'\D', a))
+# problem string
+# a = "10+10*100-20*2+3+4*3*3*3*3*3"
 
-step1 = re.split(r'["*"]', a)
-print(step1, len(step1), type(step1))
-print(step1[0], " : ", step1[1])
-step2 = re.findall(r'\d+', step1[0])[-1]
-print(step2, type(step2))
-step3 = re.findall(r'\d+', step1[1])[0]
-print(step3, type(step3))
+def stringparse_multiply(input_data):
+    """
+    :param input_data:
+    :param b:
+    :return:
+    """
 
-result_multiply = float(step2) * float(step3)
+    step1 = re.split(r'["*"]', input_data)
+    print(step1)
+    if len(step1) == 1:
+        return input_data
 
-print(result_multiply)
+    step2 = re.findall(r'\d+', step1[0])[-1]
+    step3 = re.findall(r'\d+', step1[1])[0]
+    result_multiply = float(step2) * float(step3)
+    print(result_multiply)
+    find_string = step2 + "*" + step3
+    print(str(input_data.split(find_string))) # "10*100"
+    result_string = str(input_data.split(find_string)[0]) + str(result_multiply) + str(input_data.split(find_string)[1])
+    print("The result of concatination: ", result_string.replace(" ", ""))
+    return stringparse_multiply(result_string.replace(" ", ""))
+
+
+
+print(stringparse_multiply(a))
