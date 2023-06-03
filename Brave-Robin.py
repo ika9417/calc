@@ -1,3 +1,6 @@
+"""
+Small part of main logic
+"""
 import re
 
 """
@@ -11,33 +14,35 @@ to low:
 """
 
 
-a = "10+10*100-20*2+3+4"
+# a = "10+10*100-20*2+3+4"
 
 # problem string
-# a = "10+10*100-20*2+3+4*3*3*3*3*3"
+a = "10+10.1*100-20*2+3+4*3*3*3*3*3"
 
-def stringparse_multiply(input_data):
+
+def string_parser_multiply(input_data):
     """
-    :param input_data:
-    :param b:
-    :return:
+    :param input_data: string - raw data for calculation
+    :return: New string with calculated data
     """
 
     step1 = re.split(r'["*"]', input_data)
-    print(step1)
     if len(step1) == 1:
         return input_data
 
-    step2 = re.findall(r'\d+', step1[0])[-1]
-    step3 = re.findall(r'\d+', step1[1])[0]
+    # https://docs.python.org/3/library/re.html ctr+f
+    # "A|B, where A and B can be arbitrary REs, creates a regular expression that will match either A or B."
+    step2 = re.findall(r'\d*\.\d+|\d+', step1[0])[-1]
+    step3 = re.findall(r'\d*\.\d+|\d+', step1[1])[0]
     result_multiply = float(step2) * float(step3)
-    print(result_multiply)
     find_string = step2 + "*" + step3
-    print(str(input_data.split(find_string))) # "10*100"
-    result_string = str(input_data.split(find_string)[0]) + str(result_multiply) + str(input_data.split(find_string)[1])
-    print("The result of concatination: ", result_string.replace(" ", ""))
-    return stringparse_multiply(result_string.replace(" ", ""))
+    # https://docs.python.org/3/library/stdtypes.html#str.split
+    result_string = str(input_data.split(find_string, 1)[0]) \
+                    + str(result_multiply) \
+                    + str(input_data.split(find_string, 1)[1])
+
+    return string_parser_multiply(result_string.replace(" ", ""))
 
 
-
-print(stringparse_multiply(a))
+print("The original string is:", a)
+print(string_parser_multiply(a))
